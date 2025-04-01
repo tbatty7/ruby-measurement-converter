@@ -6,8 +6,7 @@ class ConversionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should convert length measurements" do
-    # Test meters to feet
+  test "should convert meters to feet" do
     post conversions_url, params: {
       value: "1.0",
       from_unit: "meters",
@@ -16,8 +15,9 @@ class ConversionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to conversions_path(result: "3.2808", value: "1.0", from_unit: "meters", to_unit: "feet")
     follow_redirect!
     assert_equal "3.2808", @controller.instance_variable_get(:@result)
+  end
 
-    # Test kilometers to meters
+  test "should convert kilometers to meters" do
     post conversions_url, params: {
       value: "1.0",
       from_unit: "kilometers",
@@ -26,8 +26,9 @@ class ConversionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to conversions_path(result: "1000.0000", value: "1.0", from_unit: "kilometers", to_unit: "meters")
     follow_redirect!
     assert_equal "1000.0000", @controller.instance_variable_get(:@result)
+  end
 
-    # Test miles to kilometers
+  test "should convert miles to kilometers" do
     post conversions_url, params: {
       value: "1.0",
       from_unit: "miles",
@@ -38,8 +39,7 @@ class ConversionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "1.6093", @controller.instance_variable_get(:@result)
   end
 
-  test "should convert weight measurements" do
-    # Test kilograms to pounds
+  test "should convert kilograms to pounds" do
     post conversions_url, params: {
       value: "1.0",
       from_unit: "kilograms",
@@ -48,8 +48,9 @@ class ConversionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to conversions_path(result: "2.2046", value: "1.0", from_unit: "kilograms", to_unit: "pounds")
     follow_redirect!
     assert_equal "2.2046", @controller.instance_variable_get(:@result)
+  end
 
-    # Test pounds to ounces
+  test "should convert pounds to ounces" do
     post conversions_url, params: {
       value: "1.0",
       from_unit: "pounds",
@@ -58,8 +59,9 @@ class ConversionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to conversions_path(result: "16.0000", value: "1.0", from_unit: "pounds", to_unit: "ounces")
     follow_redirect!
     assert_equal "16.0000", @controller.instance_variable_get(:@result)
+  end
 
-    # Test grams to kilograms
+  test "should convert grams to kilograms" do
     post conversions_url, params: {
       value: "1000.0",
       from_unit: "grams",
@@ -70,8 +72,7 @@ class ConversionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "1.0000", @controller.instance_variable_get(:@result)
   end
 
-  test "should convert volume measurements" do
-    # Test liters to gallons
+  test "should convert liters to gallons" do
     post conversions_url, params: {
       value: "1.0",
       from_unit: "liters",
@@ -80,8 +81,9 @@ class ConversionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to conversions_path(result: "0.2642", value: "1.0", from_unit: "liters", to_unit: "gallons")
     follow_redirect!
     assert_equal "0.2642", @controller.instance_variable_get(:@result)
+  end
 
-    # Test milliliters to liters
+  test "should convert milliliters to liters" do
     post conversions_url, params: {
       value: "1000.0",
       from_unit: "milliliters",
@@ -90,8 +92,9 @@ class ConversionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to conversions_path(result: "1.0000", value: "1000.0", from_unit: "milliliters", to_unit: "liters")
     follow_redirect!
     assert_equal "1.0000", @controller.instance_variable_get(:@result)
+  end
 
-    # Test cups to liters
+  test "should convert cups to liters" do
     post conversions_url, params: {
       value: "4.0",
       from_unit: "cups",
@@ -102,8 +105,7 @@ class ConversionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "0.9464", @controller.instance_variable_get(:@result)
   end
 
-  test "should return 0 for incompatible units" do
-    # Test length to weight conversion
+  test "should return 0 for length to weight conversion" do
     post conversions_url, params: {
       value: "1.0",
       from_unit: "meters",
@@ -112,8 +114,9 @@ class ConversionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to conversions_path(result: "0", value: "1.0", from_unit: "meters", to_unit: "kilograms")
     follow_redirect!
     assert_equal "0", @controller.instance_variable_get(:@result)
+  end
 
-    # Test weight to volume conversion
+  test "should return 0 for weight to volume conversion" do
     post conversions_url, params: {
       value: "1.0",
       from_unit: "kilograms",
@@ -124,8 +127,7 @@ class ConversionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "0", @controller.instance_variable_get(:@result)
   end
 
-  test "should handle decimal values" do
-    # Test with decimal meters
+  test "should handle decimal meters to feet conversion" do
     post conversions_url, params: {
       value: "1.5",
       from_unit: "meters",
@@ -134,8 +136,9 @@ class ConversionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to conversions_path(result: "4.9213", value: "1.5", from_unit: "meters", to_unit: "feet")
     follow_redirect!
     assert_equal "4.9213", @controller.instance_variable_get(:@result)
+  end
 
-    # Test with decimal kilograms
+  test "should handle decimal kilograms to pounds conversion" do
     post conversions_url, params: {
       value: "2.5",
       from_unit: "kilograms",
