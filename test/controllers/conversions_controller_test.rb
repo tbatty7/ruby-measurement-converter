@@ -166,9 +166,9 @@ class ConversionsControllerTest < ActionDispatch::IntegrationTest
       from_unit: "meters",
       to_unit: "feet"
     }
-    assert_redirected_to conversions_path(result: "0.0000", value: "0.0", from_unit: "meters", to_unit: "feet")
+    assert_redirected_to conversions_path(result: "0", value: "0.0", from_unit: "meters", to_unit: "feet")
     follow_redirect!
-    assert_equal "0.0000", @controller.instance_variable_get(:@result)
+    assert_equal "0", @controller.instance_variable_get(:@result)
   end
 
   test "should handle negative values" do

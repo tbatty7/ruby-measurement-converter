@@ -12,6 +12,7 @@ class ConversionsController < ApplicationController
     'kilograms' => 1.0,
     'pounds' => 2.20462,
     'ounces' => 35.274,
+    'grams' => 1000.0,
     
     # Volume (base unit: liters)
     'liters' => 1.0,
@@ -28,6 +29,7 @@ class ConversionsController < ApplicationController
     
     # Weight units
     'kilograms' => 'kilograms', 'pounds' => 'kilograms', 'ounces' => 'kilograms',
+    'grams' => 'kilograms',
     
     # Volume units
     'liters' => 'liters', 'gallons' => 'liters', 'cups' => 'liters',
@@ -77,6 +79,7 @@ class ConversionsController < ApplicationController
     return value if unit == BASE_UNITS[unit]
     return value * 1000 if unit == 'kilometers'
     return value / 1000 if unit == 'milliliters'
+    return value / 1000 if unit == 'grams'
     
     value / CONVERSION_FACTORS[unit]
   end
@@ -86,6 +89,7 @@ class ConversionsController < ApplicationController
     return base_value if target_unit == BASE_UNITS[target_unit]
     return base_value / 1000 if target_unit == 'kilometers'
     return base_value * 1000 if target_unit == 'milliliters'
+    return base_value * 1000 if target_unit == 'grams'
     
     base_value * CONVERSION_FACTORS[target_unit]
   end
