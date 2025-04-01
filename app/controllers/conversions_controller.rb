@@ -60,10 +60,11 @@ class ConversionsController < ApplicationController
 
   # Converts a value from one unit to another
   def convert(value, from_unit, to_unit)
-    return 0 unless compatible_units?(from_unit, to_unit)
+    return "0" unless compatible_units?(from_unit, to_unit)
     
     base_value = convert_to_base_unit(value, from_unit)
-    convert_from_base_unit(base_value, to_unit)
+    result = convert_from_base_unit(base_value, to_unit)
+    format_result(result)
   end
 
   # Checks if the units are compatible (same type of measurement)
@@ -87,5 +88,11 @@ class ConversionsController < ApplicationController
     return base_value * 1000 if target_unit == 'milliliters'
     
     base_value * CONVERSION_FACTORS[target_unit]
+  end
+
+  # Formats the result to 4 decimal places
+  def format_result(value)
+    return "0" if value.zero?
+    "%.4f" % value
   end
 end
