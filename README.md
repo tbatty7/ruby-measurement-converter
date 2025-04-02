@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple measurement converter app for metric and standard measurements.
+This app was created using Ruby on Rails with the help of AI.  It has some automated tests.
 
-Things you may want to cover:
+Things to understand:
 
-* Ruby version
+* Ruby version 2.7.4p191
 
-* System dependencies
+* This is using serverside rendering
 
-* Configuration
+* To start project, use this command: bin/dev
+    * Go to localhost:3000
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* To run tests, use the command: bundle exec rails test
